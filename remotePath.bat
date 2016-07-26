@@ -28,3 +28,4 @@ GOTO QUIT
 
 :QUIT
 endlocal
+pause
