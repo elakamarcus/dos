@@ -9,17 +9,15 @@ GOTO GET
 
 :GET
 @echo Setting up network connections ...
-reg query \\%1\hklm\SYSTEM\CurrentControlSet\Enum\USBSTOR /s /z | findstr /I FriendlyName> %1.Friendly.tmp
 @echo Friendly output
-for /F "tokens=2 delims=)" %%i in (!TARGET!.Friendly.tmp) do @echo %%i
+for /F "tokens=2 delims=)" %%i in ('reg query \\%1\hklm\SYSTEM\CurrentControlSet\Enum\USBSTOR /s /z ^| findstr /I FriendlyName') do @echo %%i
 echo .
 GOTO NONFRIENDLY
 
 :NONFRIENDLY
 echo .
 @echo Non-Friendly output
-reg query \\%1\hklm\SYSTEM\CurrentControlSet\Enum\USBSTOR > %1.non-Friendly.tmp
-for /F "tokens=6 delims=\" %%i in (!TARGET!.non-Friendly.tmp) do @echo %%i
+for /F "tokens=6 delims=\" %%i in ('reg query \\%1\hklm\SYSTEM\CurrentControlSet\Enum\USBSTOR') do @echo %%i
 
 GOTO SUCCESS
 
