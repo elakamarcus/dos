@@ -37,3 +37,9 @@ _remotePath.bat_
 ```
 remotePath.bat rhost
 ```
+
+### Oneliners:
+Return available RAM on Win 10:
+```
+for /F "tokens=4,5" %a in ('systeminfo ^| find "Available Physical Memory"') do @echo %a %b
+```
